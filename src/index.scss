@@ -1,0 +1,458 @@
+@import url(./_reset.scss);
+
+/* Variables */
+
+
+//Breakpoints
+$desktop: 1440px;
+$tablet: 768px;
+$mobile: 375px;
+
+// Colors
+$grayish-200: hsl(252, 11%, 91%);
+$grayish-400: hsl(251, 9%, 53%);
+$grayish-700: hsl(248, 10%, 15%);
+$grayish-900: hsl(248, 15%, 11%);
+
+
+$green-apple: hsl(127, 100%, 82%);
+$red-bright: hsl(0, 91%, 63%);
+$orange: hsl(13, 95%, 66%);
+$yellow: hsl(42, 91%, 68%);
+
+// Fonts
+
+@font-face {
+  font-family: jetBrainsMonoBold;
+  src: url(../public/fonts/static/JetBrainsMono-Bold.ttf);
+}
+
+@font-face {
+  font-family: jetBrainsMono;
+  src: url(../public/fonts/JetBrainsMono-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: jetBrainsMonoBoldItalic;
+  src: url(../public/fonts/static/JetBrainsMono-BoldItalic.ttf);
+}
+
+$heading-400: 1.5rem;
+$heading-600: 2rem;
+$body-400: 1.125rem;
+
+body {
+  font-family: jetBrainsMonoBold;
+  font-size: $body-400;
+  color: $grayish-200;
+  background-color: #08070B;
+}
+
+.page-container {
+  padding: 3rem 1rem;
+
+  #page-title {
+    display: flex;
+    justify-content: center;
+    color: $grayish-400;
+    padding: 1rem;
+    font-family: jetBrainsMonoBold;
+  }
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-height: 39.5rem;
+
+  .show {
+    visibility: visible;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .generated-password-container {
+    background-color: $grayish-700;
+    padding: 1.5rem 2rem;
+    min-height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 33.75rem;
+    width: 100%;
+
+    @media (min-width: $mobile) {
+      padding: 1rem;
+    }
+
+    img {
+      font-weight: 100;
+    }
+
+    .password-placeholder {
+      color: $grayish-400;
+      font-size: $heading-600;
+    }
+
+    .generated-password {
+      font-size: $heading-600;
+
+    }
+
+
+    .copy-icon {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      svg {
+        cursor: pointer;
+      }
+
+      svg:hover path {
+        fill: $grayish-200;
+      }
+
+      #copied-label {
+        color: $green-apple;
+      }
+    }
+
+  }
+
+  .password-generator-container {
+    display: flex;
+    flex-direction: column;
+    background-color: $grayish-700;
+    padding: 1.25rem 2rem;
+    gap: 1rem;
+    max-width: 33.75rem;
+    width: 100%;
+
+    @media (min-width: $mobile) {
+      padding: 1rem;
+    }
+  }
+
+  .password-character-length-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: .75rem;
+
+    .password-character-length-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .password-length {
+        color: $green-apple;
+        font-size: $heading-600;
+      }
+    }
+
+    #passwordLengthSlider {
+      width: 100%;
+    }
+
+
+
+    input[type=range] {
+      -webkit-appearance: none;
+      background-color: $grayish-700;
+      margin-bottom: 1rem;
+      --range: calc(var(--max) - var(--min));
+      --ratio: calc((var(--value) - var(--min)) / var(--range));
+      --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+      --min: 0;
+      --max: 20;
+
+      & progress {
+        -webkit-appearance: none;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      /* Styling the track */
+
+      //Chrome
+      &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        background: linear-gradient($green-apple, $green-apple) 0/var(--sx) 100% no-repeat, $grayish-900;
+        height: 0.50rem;
+      }
+
+      &::-webkit-progress-value {
+        background: orange;
+      }
+
+      &::-webkit-progress-bar {
+        background: $green-apple;
+      }
+
+      //Mozilla
+      &::-moz-range-progress {
+        background-color: $green-apple;
+        height: 0.5rem;
+      }
+
+      &::-moz-progress-bar {
+        background-color: blue;
+      }
+
+      &::-moz-range-track {
+        -webkit-appearance: none;
+        height: 0.5rem;
+      }
+
+      //IE - Edge
+      &::-ms-fill-lower {
+        background: $green-apple;
+      }
+
+      &::-ms-fill-lower {
+        background: $grayish-900;
+      }
+
+      &::-ms-track {
+        -webkit-appearance: none;
+        height: 0.5rem;
+      }
+
+      /* Styling the slider thumb */
+
+      //Chrome
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background: $grayish-200;
+        border-color: $grayish-200;
+        transition: background .1s ease-in-out;
+        /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+        margin-top: -8px;
+
+        &:hover,
+        &:active {
+          cursor: pointer;
+          background: $grayish-700;
+          border: 2px solid $green-apple;
+        }
+      }
+
+      //Mozilla
+      &::-moz-range-thumb {
+        -webkit-appearance: none;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background: $grayish-200;
+        border-color: $grayish-200;
+
+        transition: background .1s ease-in-out;
+
+        &:hover,
+        &:active {
+          cursor: pointer;
+          background: $grayish-700;
+          border: 2px solid $green-apple;
+        }
+      }
+
+      //IE - Edge
+      &::-ms-thumb {
+        -webkit-appearance: none;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background: $grayish-200;
+        border-color: $grayish-200;
+
+        transition: background .1s ease-in-out;
+
+        &:hover,
+        &:active {
+          cursor: pointer;
+          background: $grayish-700;
+          border: 2px solid $green-apple;
+        }
+      }
+    }
+  }
+
+  .password-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .password-option {
+      display: flex;
+      align-items: center;
+    }
+
+    input[type=checkbox] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      padding: 0;
+
+    }
+
+    .check-container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 17px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      width: fit-content;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 1.25rem;
+      width: 1.25rem;
+      background-color: $grayish-700;
+      border: 2px solid $grayish-200;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+    }
+
+    .check-container:hover input~.checkmark {
+      border-color: $green-apple;
+    }
+
+    .check-container input:checked~.checkmark {
+      background-color: $green-apple;
+      border: 2px solid $green-apple;
+
+      //Display checkmark when input checked
+      &:after {
+        display: block;
+      }
+
+    }
+
+    //Checkmark style
+    .check-container .checkmark:after {
+      left: 0.3rem;
+      top: 0.1rem;
+      width: 7px;
+      height: 11px;
+      border: solid $grayish-700;
+      color: $grayish-900;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+
+  .password-strength-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $grayish-900;
+    padding: 1.5rem 1.75rem;
+
+    .gauge-container {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .gauge-result-container {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .strength-message {
+      font-size: $heading-400;
+
+    }
+
+    .strength-gauge {
+
+      display: block;
+      width: 0.65rem;
+      height: 1.75rem;
+      border: 2px solid white;
+      padding: 1px;
+    }
+
+    .too-weak-gauge {
+      background-color: $red-bright;
+      border-color: $red-bright;
+
+    }
+
+    .weak-gauge {
+      background-color: $orange;
+      border-color: $orange;
+    }
+
+    .medium-gauge {
+      background-color: $yellow;
+      border-color: $yellow;
+    }
+
+    .strong-gauge {
+      background-color: $green-apple;
+      border-color: $green-apple;
+    }
+
+    .grey-text {
+      color: $grayish-400
+    }
+  }
+
+  .primary-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem;
+    background-color: $green-apple;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid $green-apple;
+    font-size: 18px;
+    font-family: jetBrainsMonoBold;
+
+    &:hover {
+      color: $green-apple;
+      background-color: $grayish-700;
+      fill: $green-apple;
+
+      & svg path {
+        fill: $green-apple;
+      }
+    }
+  }
+
+
+
+
+
+}
